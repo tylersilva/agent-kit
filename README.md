@@ -16,23 +16,34 @@ native renderings (real subagents, enforced permission gates, slash commands / c
 See [FRAMEWORK.md](FRAMEWORK.md) for the principles and
 [docs/architecture.md](docs/architecture.md) for the full source architecture.
 
-## Install (once per machine)
+## Install
 
-Requires GitHub CLI ≥ 2.97 (`gh skill` is in preview).
+Requires GitHub CLI ≥ 2.97 (`gh skill` is in preview). Skills are self-describing: once
+installed, every agent session automatically loads the skill's name and trigger description —
+that is how your agent knows what "agent-kit" means.
+
+**A — one-time machine setup (recommended).** Install at user scope so every project's agent
+sessions know the skill:
 
 ```bash
-# for Claude Code
 gh skill install tylersilva/agent-kit agent-kit --agent claude-code --scope user
-
-# for GitHub Copilot
-gh skill install tylersilva/agent-kit agent-kit --agent github-copilot --scope user
 ```
 
-(`--scope project` installs into just the current repo instead.)
+Swap `--agent github-copilot` (or any of ~45 hosts) as needed — the flags exist because the
+non-interactive defaults are `github-copilot` + project scope. Interactively, plain
+`gh skill install tylersilva/agent-kit` prompts you through the choices. Pin a version with
+`agent-kit@v0.1.1` or `--pin v0.1.1`.
+
+**B — no pre-install.** In any repository, just name the repo in your prompt:
+
+> Install the agent-kit skill from tylersilva/agent-kit into this project and run it.
+
+The agent runs the `gh skill install` itself (project scope) and then follows the installed
+skill — your prompt's repo reference carries all the knowledge needed to bootstrap.
 
 ## Use (per project)
 
-In any repository, tell your agent:
+With the skill installed, tell your agent:
 
 > set up agent-kit in this project
 
