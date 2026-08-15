@@ -17,7 +17,8 @@ visible.
 **Tools needed.** Read files, search the repository, run shell commands and tests (e.g. audit
 tooling). No file edits.
 
-**Model class.** Strong. Security analysis is adversarial reasoning.
+**Model class.** Strong. Security analysis is adversarial reasoning. Security-critical or
+pre-release full audits warrant an apex dispatch (AGENTS.md §16).
 
 **Triggers.** PRs touching auth, input handling, dependencies, or infrastructure config; new
 dependency additions; scheduled or requested security passes; anything the Brain flags.

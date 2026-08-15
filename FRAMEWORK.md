@@ -25,8 +25,8 @@ The **main session is the Brain**: it plans, produces technical briefs, delegate
 |---|---|---|
 | implementer | mid ▾ cheap for mechanical | One brief, one branch, one objective; evidence or it didn't happen |
 | researcher | mid | Replace guessing with labeled findings: fact / inference / unknown / recommendation |
-| reviewer | mid ▸ strong on suspicion | Fresh-context auditor; assumes the implementation may be wrong |
-| security | strong | Vulnerabilities, secrets, dependency risk; never merges, never touches prod |
+| reviewer | mid ▸ strong on suspicion ▸ apex if disputed | Fresh-context auditor; assumes the implementation may be wrong |
+| security | strong ▸ apex for critical audits | Vulnerabilities, secrets, dependency risk; never merges, never touches prod |
 | devops | mid ▾ cheap for triage | CI/CD and infra config as reviewable diffs; nothing production-affecting unaided |
 
 Later specialists (GitHub operator, dependency monitor, repo health, …) are documented as
@@ -56,7 +56,9 @@ Request → Brain → technical brief → dedicated branch/worktree → implemen
 10. Smoke-test applications end to end; unit tests passing ≠ done.
 11. Route models by job, cheapest-first: strong for high-leverage reasoning and security, mid
     for bounded execution, cheap for mechanical work — and when a dispatch fails or is
-    disputed, escalate one tier up with the same brief, never retry sideways.
+    disputed, escalate one tier up with the same brief, never retry sideways. The ladder ends
+    at a frontier-class apex (Fable/Mythos-class where available), reserved deliberately for
+    intensive tasks where being wrong costs more than the call.
 12. Human approval stays explicit for consequential operations.
 13. Event-driven beats constant polling: agents wake on a trigger, work, and stop — never wake
     a model to ask whether anything needs doing.

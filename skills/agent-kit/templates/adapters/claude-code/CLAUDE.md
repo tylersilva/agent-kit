@@ -17,4 +17,6 @@ AGENTS.md above is the operating contract. On this host it is backed by real mac
 - **Model routing.** Per-dispatch model override is supported on this host — apply AGENTS.md
   §16's cheap-first ladder when dispatching subagents. The frontmatter models are the floor,
   not the law: mechanical briefs go down a tier, architectural/security/disputed work goes up.
+  Apex dispatches use the `fable` alias where the plan enables it (note: Fable may bill to
+  usage credits rather than plan limits, depending on seat tier).
 <!-- agent-kit:end:claude-overlay -->

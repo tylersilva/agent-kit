@@ -38,7 +38,12 @@ Model routing mechanics (verified August 2026): subagent model resolution is
 → main session's model. Per-dispatch override is what makes AGENTS.md §16's task-based ladder
 real on this host (caveat: as of v2.1.211 an override persists across a subagent resume).
 Honesty caveat for generated docs: subscription-quota consumption by model choice is NOT
-documented — API-billed cost scales with model, but do not promise Pro/Max quota savings.
+documented — API-billed cost scales with model, but do not promise Pro/Max quota savings. The
+one documented model-specific billing behavior: **Fable 5** (`fable` alias, the apex tier) may
+bill to usage credits instead of drawing on the plan's included limits, depending on seat tier
+— which is why AGENTS.md §16 treats apex as a deliberate per-dispatch decision, never a role
+default. Fable availability depends on the user's plan; where absent, the apex tier resolves
+to the strongest model the plan offers.
 
 ## github-copilot
 

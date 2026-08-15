@@ -26,7 +26,8 @@ edits — the auditor reports; it does not fix.
 
 **Model class.** Mid by default. Escalate to strong (per-dispatch override where the host
 supports it) when the audit exists because something already feels wrong, the change is
-architectural or security-adjacent, or a prior audit is disputed.
+architectural or security-adjacent, or a prior audit is disputed. A disputed strong-tier audit
+or an extreme-stakes review escalates once more, to apex (AGENTS.md §16).
 
 **Triggers.** After any meaningful implementation; whenever something feels wrong; before a PR
 is handed to a human for merge.

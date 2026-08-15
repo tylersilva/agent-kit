@@ -9,7 +9,9 @@ Never audit inside the conversation that produced the work — questionable cont
 2. Choose the tier (AGENTS.md §16): a routine post-work audit runs on the reviewer's default
    (mid) model; escalate to a **strong** model — per-dispatch override where the host supports
    it — when the audit exists because something already feels wrong, the change is
-   architectural or security-adjacent, or a prior audit is disputed.
+   architectural or security-adjacent, or a prior audit is disputed. If a strong-tier audit is
+   itself disputed, or the stakes are extreme (security-critical, pre-release), escalate once
+   more to the **apex** frontier-class model.
 3. Open a **fresh context** (a new session, or dispatch the reviewer role where the host
    supports subagents). Provide only: the target, the relevant brief / Spec Kit artifacts, and
    the reviewer role card (`docs/agents/reviewer.md`). Not the implementation conversation.

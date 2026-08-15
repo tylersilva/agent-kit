@@ -256,7 +256,8 @@ governs the second (briefs, not transcripts). This section governs the first.
 | Tier | Class | Used for |
 |---|---|---|
 | Brain | the session's model — strongest available | planning, delegation, verification of claims |
-| Strong | opus-class | security analysis; escalation target for everything below |
+| Apex | frontier-class (Fable/Mythos-class where available) | the escalation terminus: deep architectural analysis, debugging that resisted a strong pass, security-critical audits, disputed strong-tier results |
+| Strong | opus-class | security analysis; complex implementation; first escalation target |
 | Mid | sonnet-class | the default working tier: implementer, researcher, reviewer, devops |
 | Cheap | haiku-class | mechanical work: docs touch-ups, formatting, simple maintenance, triage; all extension roles |
 
@@ -271,6 +272,12 @@ Before dispatching, classify the task:
 If a dispatch fails, reports uncertainty, or its result is disputed by an audit: re-dispatch
 **one tier up with the same brief**. Never retry sideways at the same tier hoping for a
 different result.
+
+The ladder ends at **apex**: when a strong-tier result is itself disputed, or the task is
+genuinely intensive — deep architectural analysis, a bug that survived a strong pass, a
+security-critical review — dispatch the frontier-class model. Apex is a deliberate per-dispatch
+decision, never a role's default: use it where the cost of being wrong exceeds the cost of the
+call (it may also bill differently from the plan's included usage — see host notes).
 
 On hosts that support per-dispatch model override (Claude Code does — the dispatch-time model
 parameter outranks the agent definition's default), route per task; the frontmatter model is
