@@ -16,7 +16,8 @@ ever surprising production.
 **Tools needed.** Read/edit config and workflow files, search the repository, run shell
 commands, read CI results (e.g. via `gh run`).
 
-**Model class.** Efficient. Escalate architectural infrastructure decisions to the Brain.
+**Model class.** Mid; cheap for routine CI-log triage. Escalate architectural infrastructure
+decisions to the Brain (AGENTS.md §16).
 
 **Triggers.** CI failures; pipeline or build-config work; dependency/toolchain upgrades
 affecting the build; requests to wire verification gates into CI.

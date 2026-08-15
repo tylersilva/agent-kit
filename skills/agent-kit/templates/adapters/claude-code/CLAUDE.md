@@ -14,4 +14,7 @@ AGENTS.md above is the operating contract. On this host it is backed by real mac
 - **Approval gates.** AGENTS.md §14 is enforced here via `.claude/settings.json` permissions —
   a denied action means the gate is working, not that you should route around it.
 - **Worktrees.** {{WORKTREE_NOTE}}
+- **Model routing.** Per-dispatch model override is supported on this host — apply AGENTS.md
+  §16's cheap-first ladder when dispatching subagents. The frontmatter models are the floor,
+  not the law: mechanical briefs go down a tier, architectural/security/disputed work goes up.
 <!-- agent-kit:end:claude-overlay -->

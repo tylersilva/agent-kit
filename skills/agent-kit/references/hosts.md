@@ -28,10 +28,17 @@ Claude Code does NOT read AGENTS.md natively — the overlay imports it.
 | `adapters/claude-code/settings.json` | `.claude/settings.json` (deep-merge per `merging.md`) |
 | `adapters/claude-code/commands/*.md` | `.claude/commands/audit.md`, `brief.md` |
 
-Frontmatter facts (verified): `tools` is a comma-separated string; `model` accepts
-sonnet/opus/haiku/inherit; `isolation: worktree` is valid and runs the subagent in an isolated
-git worktree. `{{ISOLATION_LINE}}` in the implementer template becomes `isolation: worktree`
-when worktrees were chosen, otherwise remove the line entirely.
+Frontmatter facts (verified): `tools` is a comma-separated string; `model` accepts aliases
+(sonnet/opus/haiku/fable/inherit) and full model IDs; `isolation: worktree` is valid and runs
+the subagent in an isolated git worktree. `{{ISOLATION_LINE}}` in the implementer template
+becomes `isolation: worktree` when worktrees were chosen, otherwise remove the line entirely.
+
+Model routing mechanics (verified August 2026): subagent model resolution is
+`CLAUDE_CODE_SUBAGENT_MODEL` env var → **per-dispatch model parameter** → frontmatter `model:`
+→ main session's model. Per-dispatch override is what makes AGENTS.md §16's task-based ladder
+real on this host (caveat: as of v2.1.211 an override persists across a subagent resume).
+Honesty caveat for generated docs: subscription-quota consumption by model choice is NOT
+documented — API-billed cost scales with model, but do not promise Pro/Max quota savings.
 
 ## github-copilot
 

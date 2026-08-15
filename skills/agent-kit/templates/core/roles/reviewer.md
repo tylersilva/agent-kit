@@ -24,7 +24,9 @@ success claims.
 **Tools needed.** Read files, search the repository, run shell commands and tests. No file
 edits — the auditor reports; it does not fix.
 
-**Model class.** Strong. Auditing is high-leverage reasoning.
+**Model class.** Mid by default. Escalate to strong (per-dispatch override where the host
+supports it) when the audit exists because something already feels wrong, the change is
+architectural or security-adjacent, or a prior audit is disputed.
 
 **Triggers.** After any meaningful implementation; whenever something feels wrong; before a PR
 is handed to a human for merge.

@@ -15,7 +15,8 @@ focused context, one completion criterion.
 
 **Tools needed.** Read/edit files, search the repository, run shell commands and tests.
 
-**Model class.** Efficient. Implementation is execution, not open-ended reasoning.
+**Model class.** Mid by default. The Brain dispatches cheap for mechanical briefs (renames,
+doc sync, config bumps) and strong for complex ones, via per-dispatch override (AGENTS.md §16).
 
 **Triggers.** The Brain has produced a technical brief for a bounded coding task (feature task,
 bug fix, test work, docs, refactor, migration).

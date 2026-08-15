@@ -93,6 +93,9 @@ its rules exactly, or hand the role card plus a technical brief to a separate se
 **Escalation rule (do not skip):** when a worker reports that something is impossible, unknown,
 or proposes a path that seems dubious, do not accept the claim. Dispatch the researcher role
 with the specific question. Evidence-backed findings return to implementation; guesses do not.
+
+Model choice at dispatch time follows §16's routing ladder — classify the task's complexity
+before you pick the tier.
 <!-- agent-kit:end:brain -->
 
 <!-- agent-kit:begin:briefs -->
@@ -241,3 +244,45 @@ intent.
 
 (Add to this list whenever a surprising failure costs real time — that is durable memory.)
 <!-- agent-kit:end:pitfalls -->
+
+<!-- agent-kit:begin:model-routing -->
+## 16. Model Routing & Activation
+
+Cost has two levers: **which model** an agent uses, and **how much context** it consumes. §12
+governs the second (briefs, not transcripts). This section governs the first.
+
+### Tiers
+
+| Tier | Class | Used for |
+|---|---|---|
+| Brain | the session's model — strongest available | planning, delegation, verification of claims |
+| Strong | opus-class | security analysis; escalation target for everything below |
+| Mid | sonnet-class | the default working tier: implementer, researcher, reviewer, devops |
+| Cheap | haiku-class | mechanical work: docs touch-ups, formatting, simple maintenance, triage; all extension roles |
+
+### Cheap-first escalation ladder
+
+Before dispatching, classify the task:
+
+- **Mechanical / pattern-following** (rename, doc sync, config bump, log triage) → cheap.
+- **Bounded implementation** (a normal technical brief) → mid.
+- **Architectural, cross-cutting, security-sensitive, or disputed** → strong.
+
+If a dispatch fails, reports uncertainty, or its result is disputed by an audit: re-dispatch
+**one tier up with the same brief**. Never retry sideways at the same tier hoping for a
+different result.
+
+On hosts that support per-dispatch model override (Claude Code does — the dispatch-time model
+parameter outranks the agent definition's default), route per task; the frontmatter model is
+the floor, not the law. On hosts without model control, the ladder still governs escalation of
+*scrutiny*: a fresh session and a stronger adversarial stance.
+
+### Activation
+
+An agent runs only when the Brain dispatches it or an explicit trigger fires: wake → work →
+stop. Never wake a model — on any tier — just to ask whether anything needs doing; idle
+specialists consume nothing.
+
+Tier names are policy; concrete model IDs are configuration. Provider billing and quota rules
+change — verify current documentation before assuming cost behavior.
+<!-- agent-kit:end:model-routing -->

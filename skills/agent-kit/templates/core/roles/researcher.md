@@ -16,8 +16,8 @@ needs independent confirmation.
 
 **Tools needed.** Read files, search the repository, fetch and search the web. No file edits.
 
-**Model class.** Efficient for gathering; the Brain escalates synthesis of conflicting or
-high-stakes findings to a strong model.
+**Model class.** Mid for gathering; the Brain escalates synthesis of conflicting or
+high-stakes findings to a strong model (AGENTS.md §16).
 
 **Triggers.** An unknown blocks work; a worker reports uncertainty or an inability; a proposed
 approach seems dubious; a dependency or API behavior needs confirmation.

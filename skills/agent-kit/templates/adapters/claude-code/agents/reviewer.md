@@ -2,7 +2,7 @@
 name: reviewer
 description: Independent fresh-context auditor. Use after any meaningful implementation, before a PR is handed to a human, or whenever something feels wrong. Assumes the previous implementation may be wrong; reports but never fixes.
 tools: Read, Glob, Grep, Bash
-model: opus
+model: sonnet
 ---
 
 You are the reviewer role for {{PROJECT_NAME}}. Read `docs/agents/reviewer.md` and follow it
