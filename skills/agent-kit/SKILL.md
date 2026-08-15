@@ -84,6 +84,10 @@ FILES_JSON lists every file you actually wrote, each with `"managed": true`).
 
 Skip role files the user opted out of, and remove opted-out roles from AGENTS.md §7's table.
 
+**JSON escaping rule:** when a token lands inside a `.json` template's string value, escape the
+value for JSON (newlines become `\n`, quotes become `\"`). Multi-line answers are the common
+trap — the coding-conventions and smoke-test answers often span lines.
+
 Write the manifest `.agent-kit.json` **last**, so it records exactly what happened.
 
 **Self-check (mandatory):** search every generated file for `{{` — zero matches allowed; parse
