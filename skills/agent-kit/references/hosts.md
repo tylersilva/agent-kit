@@ -1,0 +1,69 @@
+# Host Adapter Mapping
+
+What each selected host gets, beyond the universal core. Facts below were verified August 2026;
+where a host's format is marked *verify*, check its current docs before generating.
+
+## Universal core (every host, always)
+
+| Template | Destination in project |
+|---|---|
+| `core/AGENTS.md` | `AGENTS.md` |
+| `core/roles/*.md` | `docs/agents/<role>.md` |
+| `core/rituals/*.md` | `docs/agents/rituals/<ritual>.md` |
+| `core/docs/adr-0001…` / `adr-template.md` | `docs/adr/0001-record-architecture-decisions.md`, `docs/adr/template.md` |
+| `core/docs/runbooks-README.md` / `runbook-smoke-test.md` | `docs/runbooks/README.md`, `docs/runbooks/smoke-test.md` |
+| `core/agent-kit.json` | `.agent-kit.json` |
+
+AGENTS.md is read natively by GitHub Copilot (cloud agent, CLI, VS Code), Codex, Cursor,
+Gemini CLI, and other AGENTS.md-aware hosts.
+
+## claude-code
+
+Claude Code does NOT read AGENTS.md natively — the overlay imports it.
+
+| Template | Destination |
+|---|---|
+| `adapters/claude-code/CLAUDE.md` | `CLAUDE.md` (contains `@AGENTS.md` import — verified syntax; relative to the file; max 4 hops) |
+| `adapters/claude-code/agents/*.md` | `.claude/agents/<role>.md` |
+| `adapters/claude-code/settings.json` | `.claude/settings.json` (deep-merge per `merging.md`) |
+| `adapters/claude-code/commands/*.md` | `.claude/commands/audit.md`, `brief.md` |
+
+Frontmatter facts (verified): `tools` is a comma-separated string; `model` accepts
+sonnet/opus/haiku/inherit; `isolation: worktree` is valid and runs the subagent in an isolated
+git worktree. `{{ISOLATION_LINE}}` in the implementer template becomes `isolation: worktree`
+when worktrees were chosen, otherwise remove the line entirely.
+
+## github-copilot
+
+Copilot reads AGENTS.md natively on all surfaces, so no context-file overlay is needed. It also
+reads a root `CLAUDE.md` if present — the two adapters coexist; keep instructions
+non-conflicting.
+
+| Template | Destination |
+|---|---|
+| `adapters/github-copilot/agents/*.agent.md` | `.github/agents/<role>.agent.md` |
+| `adapters/github-copilot/prompts/*.prompt.md` | `.github/prompts/audit.prompt.md`, `brief.prompt.md` |
+
+Format facts (verified August 2026): `.agent.md` is the canonical custom-agent extension
+(read by Copilot cloud agent, Copilot CLI, and VS Code); safe cross-surface frontmatter is
+`name` + `description` — `tools` takes an array here (NOT a comma string) and its vocabulary
+varies by surface, so the kit omits it and enforces restrictions in body prose. Prompt files
+are a VS Code / Visual Studio / JetBrains feature (public preview); the cloud agent and CLI
+ignore them — the rituals remain reachable via `docs/agents/rituals/` everywhere.
+
+## Other hosts (cursor, codex, gemini-cli, …)
+
+Universal core only. AGENTS.md's §7 tells the host to adopt role cards in fresh sessions when
+it has no native subagents. Add a dedicated adapter directory later if a host earns one — the
+core does not change.
+
+## Spec Kit integration values
+
+`specify init --here --integration <value> --force` — value per primary host: `claude` for
+claude-code, `copilot` for github-copilot. Run init once with the PRIMARY host's integration.
+*Verify at run time* with `specify init --help`: whether `--integration` accepts multiple
+values (unconfirmed), and current flag names — this CLI has already renamed `--ai` →
+`--integration`. After init, detect which command style landed
+(`.claude/skills/speckit-*/SKILL.md` → dash style `/speckit-specify`;
+`.claude/commands/speckit.*.md` → dot style `/speckit.specify`; for copilot,
+`.github/prompts/speckit.*` or agents equivalents) and write that style into AGENTS.md §13.

@@ -1,0 +1,27 @@
+{
+  "kitVersion": "{{KIT_VERSION}}",
+  "installedAt": "{{INSTALL_DATE}}",
+  "hosts": {{HOSTS_JSON}},
+  "answers": {
+    "projectName": "{{PROJECT_NAME}}",
+    "projectPurpose": "{{PROJECT_PURPOSE}}",
+    "projectType": "{{PROJECT_TYPE}}",
+    "techStack": "{{TECH_STACK}}",
+    "buildCmd": "{{BUILD_CMD}}",
+    "testCmd": "{{TEST_CMD}}",
+    "runCmd": "{{RUN_CMD}}",
+    "lintCmd": "{{LINT_CMD}}",
+    "codingConventions": "{{CODING_CONVENTIONS}}",
+    "smokeTest": "{{SMOKE_TEST}}",
+    "autonomyLevel": "{{AUTONOMY_LEVEL}}",
+    "roles": {{ROLES_JSON}},
+    "worktrees": {{WORKTREES_BOOL}},
+    "defaultBranch": "{{DEFAULT_BRANCH}}",
+    "branchPrefix": "{{BRANCH_PREFIX}}",
+    "deploymentNotes": "{{DEPLOYMENT_NOTES}}",
+    "deployNeverTouch": "{{DEPLOY_NEVER_TOUCH}}",
+    "hardNos": "{{HARD_NOS}}",
+    "specKit": "{{SPECKIT_STATUS}}"
+  },
+  "files": {{FILES_JSON}}
+}
