@@ -2,6 +2,7 @@
 name: agent-kit
 description: Bootstrap or update an agent-agnostic multi-agent working structure in the current project. Use when the user says "set up agent-kit", "initialize the multi-agent framework", "bootstrap this repo for agents", or asks to install AGENTS.md, agent role definitions, approval gates, and Spec Kit scaffolding.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion, WebFetch
+license: MIT
 ---
 
 # agent-kit: Project Bootstrap
