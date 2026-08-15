@@ -7,10 +7,11 @@
       "Bash(git show:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git checkout:*)",
+      "Bash(git checkout -b:*)",
       "Bash(git switch:*)",
-      "Bash(git branch:*)",
-      "Bash(git worktree:*)",
+      "Bash(git branch)",
+      "Bash(git worktree add:*)",
+      "Bash(git worktree list)",
       "Bash(git push:*)",
       "Bash(gh pr create:*)",
       "Bash(gh pr view:*)",
@@ -26,6 +27,9 @@
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git worktree remove:*)",
       "Bash(gh pr merge:*)",
       "Bash(gh release:*)",
       "Bash(gh repo delete:*)",
@@ -35,8 +39,11 @@
     "deny": [
       "Read(.env)",
       "Read(.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
       "Read(**/secrets/**)",
       "Read(**/*.pem)",
+      "Read(**/*.key)",
       "Read(**/*credentials*)"
     ]
   }

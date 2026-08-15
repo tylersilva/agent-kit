@@ -40,10 +40,22 @@ The template ships the **Standard** baseline. Adjust at generation time:
 - **Autonomous**: as Standard (merge/deploy/destructive stay gated — that is the §24 floor,
   regardless of autonomy level).
 - `{{STACK_ALLOW_ENTRIES}}`: JSON string entries for the detected commands, e.g.
-  `"Bash(npm test:*)", "Bash(npm run build:*)", "Bash(npm run lint:*)"`. Never allowlist a
-  command you did not detect or the user did not confirm.
+  `"Bash(npm test:*)", "Bash(npm run build:*)", "Bash(npm run lint:*)"`. This token is a
+  security-sensitive sink: entries must be **literal command prefixes** the user confirmed in
+  the interview — never free text, never shell metacharacters, never a command you inferred but
+  did not confirm. When in doubt, leave it out; unlisted commands simply prompt.
 - `{{DEPLOY_ASK_ENTRIES}}`: entries for deploy commands named in the interview (prefix each
   with a comma to keep the JSON valid), or empty string if none.
+
+### Limits of prefix rules (tell the user this at generation time)
+
+Prefix-matched permission rules cannot express flag constraints: `git push origin --force`
+matches the `Bash(git push:*)` allow while evading the `Bash(git push --force:*)` ask, and
+allowed `gh`/`git push` commands can target arbitrary repositories via flags. Never present the
+generated settings as a sandbox. Recommend in the final report: enable GitHub branch protection
+on the default branch (the enforced merge/force-push gate) and use minimum-scope tokens. The
+`deny` Read rules likewise stop the Read tool, not `Bash(cat .env)` — secrets belong outside
+the working tree where possible.
 
 ## Other collisions
 

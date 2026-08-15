@@ -225,6 +225,13 @@ or secret changes, external public communication, and anything listed in Deploym
 never-touch.
 
 **Hard NOs for this repository:** {{HARD_NOS}}
+
+**Limits of local gates:** permission rules are workflow discipline, not containment — argument
+reordering can slip past command patterns, and any allowed network command (`git push`,
+`gh pr create`) can technically reach arbitrary repositories. The enforced backstops are
+GitHub **branch protection** on {{DEFAULT_BRANCH}} (enable it), minimum-scope tokens, and the
+host's own sandboxing. Do not treat a permissive local gate as permission to bypass §24's
+intent.
 <!-- agent-kit:end:gates -->
 
 <!-- agent-kit:begin:pitfalls -->
