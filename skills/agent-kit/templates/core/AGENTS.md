@@ -82,7 +82,7 @@ Specialist roles are defined as role cards in `docs/agents/`. Delegate by role:
 |---|---|---|
 | Implementation | `docs/agents/implementer.md` | Any coding task with a clear objective |
 | Unknowns / dubious claims | `docs/agents/researcher.md` | Before guessing, and whenever a worker says "can't" or "don't know" |
-| Post-work audit | `docs/agents/reviewer.md` | After meaningful changes, always in a fresh context |
+| Post-work audit | `docs/agents/reviewer.md` | Before the next stage consumes any meaningful artifact (§10's definition — specs and plans included), always in a fresh context |
 | Vulnerabilities / secrets / authz | `docs/agents/security.md` | Security-relevant diffs and dependency changes |
 | CI/CD and infrastructure | `docs/agents/devops.md` | Pipeline and infra-config work |
 
@@ -163,6 +163,20 @@ Treat every statement — a worker's or your own — as a claim until backed by 
 - Do not infer environment state from memory.
 - Do not guess when the repository or environment can be inspected.
 - Prefer measurements, commands, tests, logs, and reproducible evidence.
+- **An artifact's author cannot close its own quality gate.** Any checklist, validation, or
+  "all checks pass" claim produced in the same context as the work itself is provisional until
+  a fresh-context audit confirms it — the authoring context is structurally blind to its own
+  assumptions.
+- **A checklist item is closed by cited evidence** — a quote or file reference showing the
+  item holds — never by assertion. An all-pass checklist without per-item evidence is treated
+  as unchecked.
+
+**What counts as a meaningful change (not discretionary):** any artifact that downstream work
+builds on — a spec, a plan, a constitution, an ADR, implementation code. The fresh-context
+audit runs **before the next lifecycle stage consumes the artifact**, not at the end of the
+feature. Governance and spec documents are never "just docs" — they are the artifacts with the
+highest fan-out, and skipping their audit propagates their defects into everything built on
+them.
 
 When something feels wrong, do not extend the same conversation. Run the independent audit
 ritual (`docs/agents/rituals/audit.md`) in a **fresh context** that assumes the previous
@@ -199,14 +213,34 @@ repository history, whole conversations, other workers' transcripts, or unrelate
 ## 13. Spec Kit Workflow
 
 Feature-level software development in this repository goes through Spec Kit — do not build a
-parallel workflow. The lifecycle: {{SPECKIT_COMMAND_STYLE}} specify → clarify → plan → tasks →
-analyze → implement, with artifacts under `.specify/`.
+parallel workflow. The lifecycle, with audit gates: {{SPECKIT_COMMAND_STYLE}} specify →
+**audit** → clarify → plan → **audit** → tasks → analyze → implement, with artifacts under
+`.specify/`. Each audit is the §10 fresh-context ritual applied to the artifact just produced,
+run before the next stage consumes it.
+
+**Generated artifacts (specs, plans, constitutions) are work products and are audited like any
+other work product:**
+
+- **Traceability.** Every requirement (MUST/SHOULD) either traces to a source — the request,
+  a project doc, the constitution — or is explicitly declared in the artifact's Assumptions
+  section as an invention needing ratification. Undeclared invention is a defect, not a
+  default.
+- **Bidirectional consistency.** Every behavior asserted in an acceptance scenario has a
+  corresponding functional requirement; every functional requirement has at least one scenario
+  or criterion that would catch its violation.
+- **Closeable criteria.** Every success criterion is measurable by this feature's deliverable
+  alone. Needing another feature to exist first is a declared dependency, not a criterion.
 
 When a feature is too large for one clean run, split rather than grow the conversation:
 
 - **Bounded runs** — implement only a bounded group of tasks or one phase at a time.
 - **Delegate parallel tasks** — hand independent tasks to separate workers/subagents.
 - **Spec of specs** — decompose the feature into independently specified sub-features first.
+
+Where the agent-kit audit-gate extension is installed (check `.specify/extensions.yml` for
+`agent-kit-audit`), the specify/plan audit gates fire **automatically** via `after_specify` /
+`after_plan` hooks — pipeline structure enforces the discipline, and this section is the
+fallback only where hooks are unavailable.
 
 Project principles live in the Spec Kit constitution; feature decisions live in feature
 artifacts. This file governs behavior; Spec Kit governs the feature lifecycle.

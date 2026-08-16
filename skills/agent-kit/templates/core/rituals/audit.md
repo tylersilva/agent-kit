@@ -1,7 +1,9 @@
 # Ritual: Independent Audit
 
-Use when completed work needs independent verification, or whenever something feels wrong.
-Never audit inside the conversation that produced the work — questionable context contaminates.
+Use before the next lifecycle stage consumes any meaningful artifact — implementation code,
+and equally specs, plans, constitutions, and ADRs (AGENTS.md §10's definition) — and whenever
+something feels wrong. Never audit inside the conversation that produced the work —
+questionable context contaminates, and an author cannot close its own quality gate.
 
 ## Procedure
 
@@ -15,7 +17,9 @@ Never audit inside the conversation that produced the work — questionable cont
 3. Open a **fresh context** (a new session, or dispatch the reviewer role where the host
    supports subagents). Provide only: the target, the relevant brief / Spec Kit artifacts, and
    the reviewer role card (`docs/agents/reviewer.md`). Not the implementation conversation.
-4. Give the auditor this charge, filling in the target:
+4. Give the auditor the matching charge, filling in the target.
+
+**For code / implementation work:**
 
 ```text
 You are auditing: <TARGET>
@@ -28,6 +32,33 @@ Do not rely on the previous agent's assertion that the feature works.
 
 Re-run the tests and the smoke test yourself (AGENTS.md §3, §5). Report using the reviewer
 role card's format: VERDICT / EVIDENCE / FINDINGS / MISSING TESTS.
+```
+
+**For a document artifact (spec, plan, constitution, ADR):**
+
+```text
+You are auditing the document artifact: <TARGET>
+
+Assume the artifact may be wrong. Its author cannot close its own quality gate (AGENTS.md
+§10): treat any self-assessed checklist — including an all-pass one — as a claim under audit,
+not a starting point.
+
+Verify, against the artifact's actual text:
+1. EVIDENCE — the sources it derives from support what it asserts.
+2. SELF-ASSESSMENT — re-verify every checklist item; an item is closed only by cited evidence
+   (a quote or file reference), never by assertion.
+3. TRACEABILITY — every MUST/SHOULD requirement traces to a source or is declared in
+   Assumptions; undeclared invention is a defect (AGENTS.md §13).
+4. BIDIRECTIONAL CONSISTENCY — every acceptance-scenario behavior has a functional
+   requirement, and every requirement has a scenario or criterion that would catch its
+   violation (AGENTS.md §13).
+5. CLOSEABLE CRITERIA — every success criterion is measurable by this artifact's feature
+   alone; cross-feature needs are declared dependencies (AGENTS.md §13).
+6. INTERNAL CONSISTENCY — stories vs. requirements vs. criteria vs. edge cases agree.
+
+Report using the reviewer role card's format: VERDICT / EVIDENCE / FINDINGS / MISSING TESTS
+(for a document, MISSING TESTS = the checks or criteria the artifact should contain and does
+not).
 ```
 
 5. Relay the verdict **unsoftened**. A "defective" verdict is a result, not an embarrassment.

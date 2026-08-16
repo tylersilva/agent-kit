@@ -12,6 +12,7 @@ where a host's format is marked *verify*, check its current docs before generati
 | `core/rituals/*.md` | `docs/agents/rituals/<ritual>.md` |
 | `core/docs/adr-0001…` / `adr-template.md` | `docs/adr/0001-record-architecture-decisions.md`, `docs/adr/template.md` |
 | `core/docs/runbooks-README.md` / `runbook-smoke-test.md` | `docs/runbooks/README.md`, `docs/runbooks/smoke-test.md` |
+| `core/speckit-extension/` (extension.yml + commands/) | `docs/agents/speckit-extension/` (then `specify extension add --dev` — Phase 5) |
 | `core/agent-kit.json` | `.agent-kit.json` |
 
 AGENTS.md is read natively by GitHub Copilot (cloud agent, CLI, VS Code), Codex, Cursor,
@@ -68,6 +69,27 @@ ignore them — the rituals remain reachable via `docs/agents/rituals/` everywhe
 Universal core only. AGENTS.md's §7 tells the host to adopt role cards in fresh sessions when
 it has no native subagents. Add a dedicated adapter directory later if a host earns one — the
 core does not change.
+
+## Spec Kit extension hooks (verified against v0.16.4, August 2026)
+
+Spec Kit's extension system provides lifecycle hooks configured in `.specify/extensions.yml`
+(keys: `installed`, `settings`, `hooks`), with `before_`/`after_` events for every core command
+(`after_specify`, `after_plan`, etc.). Constraints that shape the kit's design:
+
+- A hook's `command` must be an **extension-provided prompt command** (e.g.
+  `speckit.agent-kit-audit.gate`) — there is no field for raw shell or inline prompt text.
+- Execution is **agent-mediated**: the `/speckit.specify` and `/speckit.plan` command templates
+  read `extensions.yml` and run mandatory hooks (`optional: false`) before their completion
+  report; `optional: true` hooks are offered to the user via their `prompt`.
+- Install route: `specify extension add --dev <path>` registers the extension's manifest hooks
+  into `.specify/extensions.yml` automatically. The kit ships its extension source in
+  `templates/core/speckit-extension/` (manifest schema copied from the official
+  `agent-context` extension, the closest analog).
+- The separate **workflow engine** (`specify workflow`, v0.7.0+; shell steps, human gates,
+  overlays, state under `.specify/workflows/runs/`) is the intended tool for shell steps and
+  human gates around stages — a future option, not used by the kit today.
+- Extensions arrived in Spec Kit v0.0.93 and the hook config was documented July 2026 — older
+  installs may lack them; the skill degrades to AGENTS.md §13's normative text.
 
 ## Spec Kit integration values
 

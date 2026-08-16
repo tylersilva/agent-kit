@@ -21,6 +21,16 @@ success claims.
 - Check what is missing as hard as what is present: absent tests, unhandled edge cases,
   unverified requirements.
 
+**Document-artifact audit mode** (spec, plan, constitution, ADR): "reproduce the behavior"
+means —
+(a) verify the evidence and sources the artifact derives from;
+(b) re-verify any self-assessed checklist against the artifact's actual text — an all-pass
+checklist is a claim under audit, not a starting point;
+(c) check traceability, bidirectional consistency, and closeable criteria as defined in
+AGENTS.md §13;
+(d) check internal consistency across sections (stories vs. requirements vs. criteria vs.
+edge cases).
+
 **Tools needed.** Read files, search the repository, run shell commands and tests. No file
 edits — the auditor reports; it does not fix.
 

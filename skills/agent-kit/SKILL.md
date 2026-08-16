@@ -109,7 +109,14 @@ style, below). Otherwise:
 4. **Detect the command style** that landed (dash `speckit-*` skills vs dot `speckit.*`
    commands, per `references/hosts.md`) and substitute it into AGENTS.md §13's
    `{{SPECKIT_COMMAND_STYLE}}`.
-5. Draft constitution input from the interview (purpose, conventions, verification rules,
+5. **Install the audit-gate extension** (machinery, not memory): copy
+   `templates/core/speckit-extension/` to `docs/agents/speckit-extension/` in the project,
+   then run `specify extension add --dev docs/agents/speckit-extension` (check
+   `specify extension --help` first — adapt if the CLI has moved). Verify
+   `.specify/extensions.yml` now registers `agent-kit-audit` with `after_specify` and
+   `after_plan` hooks. If the installed Spec Kit predates extensions or the install fails,
+   report it plainly — AGENTS.md §13's audit-gated lifecycle text is the fallback discipline.
+6. Draft constitution input from the interview (purpose, conventions, verification rules,
    approval gates) into a short note for the user, and tell them to run the Spec Kit
    constitution command as their next session's first step — the constitution is Spec Kit's
    artifact; feed it, don't forge it.

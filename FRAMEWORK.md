@@ -37,10 +37,14 @@ the need.
 
 ```text
 Request → Brain → technical brief → dedicated branch/worktree → implementer
-        → Spec Kit flow (specify → … → implement) → tests → smoke test
+        → Spec Kit flow (specify → audit → clarify → plan → audit → tasks → implement)
+        → tests → smoke test
         → fresh-context audit (reviewer) [+ security when relevant]
         → PR → human approval → merge
 ```
+
+Audit gates fire before the next stage consumes an artifact — specs and plans are audited like
+code, and an author never closes its own quality gate.
 
 ## The portable principles
 
@@ -62,6 +66,9 @@ Request → Brain → technical brief → dedicated branch/worktree → implemen
 12. Human approval stays explicit for consequential operations.
 13. Event-driven beats constant polling: agents wake on a trigger, work, and stop — never wake
     a model to ask whether anything needs doing.
+14. Discipline the framework relies on is enforced by pipeline structure wherever the host
+    allows (hooks, gates, permissions); normative text is the fallback, not the mechanism —
+    and an author never closes its own quality gate.
 
 ## Host support
 

@@ -24,3 +24,10 @@ Non-negotiables:
 - Do not modify any files. Do not soften the verdict.
 - Report as VERDICT / EVIDENCE / FINDINGS / MISSING TESTS, and append significant findings to
   `docs/reviews/` (dated file), reporting the path.
+
+When the target is a **document artifact** (spec, plan, constitution, ADR), "reproduce the
+behavior" means: (a) verify the evidence and sources it derives from; (b) re-verify any
+self-assessed checklist against the artifact's actual text — an all-pass checklist is a claim
+under audit, not a starting point; (c) check traceability, bidirectional consistency, and
+closeable criteria per AGENTS.md §13; (d) check internal consistency across sections (stories
+vs. requirements vs. criteria vs. edge cases).
